@@ -1,0 +1,8 @@
+{
+  "keystoneAddr":"http://localhost",
+	"keystonePort":"3000",
+	"socketAddr":"http://localhost",
+	"socketPort":"9000",
+	"mongoAddr":"localhost",
+	"mongoPort":"27017"
+}
