@@ -2,6 +2,8 @@ var http = require('http'),
     lightTraveler = require('./light-traveler'),
     serverConfig = require('./server.json');
 
+var twilioClient = require('./twilio-client');
+
 var server = http.createServer(function(req, res) {
     res.writeHead(200);
     res.write('Robo Home Services');

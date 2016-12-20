@@ -1,11 +1,12 @@
 var cron = require('node-cron');
 var request = require('request');
-var phillipsBridge = require('./../phillips-bridge');
 var serverConfig = require('../server.json');
 var address = serverConfig.socketAddr + ":" + serverConfig.socketPort;
 var socket = require('socket.io-client')(address);
 var moment = require('moment');
 var Agenda = require('agenda');
+
+//AIzaSyB9hlmM2bVRtba8WskOkOioLGrbplwT6Vw
 
 function LightTraveler() {
     this.setCronJobs = this.setCronJobs.bind(this);
@@ -39,27 +40,17 @@ LightTraveler.prototype.init = function() {
         lightTraveler.agenda.emit('ready');
 
         lightTraveler.agenda.define('lightEvent', function(job, done) {
-            var jobTime = job.attrs.data.time;
-			var nowTime = moment(new Date());
-            console.log('lightEvent encountered : ' + nowTime.diff(jobTime,'minutes'));
-            var toggle = false;
-            if(nowTime.diff(jobTime,'minutes') < 1) {
-                toggle = true;
-            } else if(moment(nowTime).isBetween(job.attrs.data.start,job.attrs.data.end)) {
-                toggle = true;
-            }
-            if(toggle) {
-                console.log('turn lights ' + job.attrs.data.state);
-                phillipsBridge.toggleLights(job.attrs.data.state);
-            }
+            console.log('lightEvent encountered :');
+            console.log(job);
+
+            // Do something with the LIGHTS!!!
+
             done();
         });
 
         lightTraveler.agenda.start();
 
         lightTraveler.createLightAgenda();
-        // lightTraveler.fetchItinerary();
-        lightTraveler.setCronJobs();
 
         return;
 
@@ -69,7 +60,7 @@ LightTraveler.prototype.init = function() {
 LightTraveler.prototype.setCronJobs = function() {
     console.log('setCronJobs : scheduling cron for web services');
 
-    lightTraveler.travelCron = cron.schedule('0 * * * *', function() {
+    lightTraveler.travelCron = cron.schedule('*/1 * * * *', function() {
         lightTraveler.fetchItinerary();
     });
 }
@@ -129,18 +120,11 @@ LightTraveler.prototype.fetchExistingTravelDays = function(callback) {
 }
 
 LightTraveler.prototype.insertNewTravelDays = function() {
-    var log = [];
     for (var i = 0; i < lightTraveler.newTravelDays.length; i++) {
         var day = lightTraveler.newTravelDays[i];
         var travelDay = lightTraveler.newTravelDayDetails[day];
         if (lightTraveler.existingTravelDays.indexOf(day) > -1) {
             console.log('nope it exists already', travelDay.day);
-
-            // Checking if we are done
-            log.push(travelDay.day);
-            if(log.length == lightTraveler.newTravelDays.length) {
-                lightTraveler.createLightAgenda();
-            }
         } else {
             console.log('it a new one', travelDay.day);
             request.post({
@@ -151,12 +135,6 @@ LightTraveler.prototype.insertNewTravelDays = function() {
                     trip: travelDay.id
                 }
             }, function(error, response, body) {
-
-                // Checking if we are done
-                log.push(travelDay.day);
-                if(log.length == lightTraveler.newTravelDays.length) {
-                    lightTraveler.createLightAgenda();
-                }
                 if (error) {
                     throw error;
                 }
@@ -196,10 +174,8 @@ LightTraveler.prototype.createLightAgenda = function() {
                     lightTraveler.agenda.schedule(
                         start,
                         'lightEvent', {
-                            state: true,
+                            state: 'on',
                             time: start,
-                            start: start,
-                            end: end,
                             type: 'lightEvent'
                         }
                     );
@@ -208,10 +184,8 @@ LightTraveler.prototype.createLightAgenda = function() {
                     lightTraveler.agenda.schedule(
                         end,
                         'lightEvent', {
-                            state: false,
+                            state: 'off',
                             time: end,
-                            start: start,
-                            end: end,
                             type: 'lightEvent'
                         }
                     );
