@@ -81,7 +81,7 @@ PhillipsBridge.prototype.pingBridge = function() {
 }
 
 PhillipsBridge.prototype.createUser = function() {
-    let user = new client.users.User;
+    var user = new client.users.User;
 
     // Optionally configure a device type / agent on the user
     user.deviceType = 'my_device_type'; // Default is 'huejay'
