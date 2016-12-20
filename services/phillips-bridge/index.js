@@ -16,8 +16,9 @@ PhillipsBridge.prototype.init = function() {
 
 PhillipsBridge.prototype.getLightInfo = function() {
     client.lights.getAll()
-        .then(lights => {
-            for (let light of lights) {
+        .then(function(lights) {
+            for (var i=0; i<lights.length; i++) {
+                var light = lights[i];
                 console.log(`Light [${light.id}]: ${light.name}`);
                 console.log(`  Type:             ${light.type}`);
                 console.log(`  Unique ID:        ${light.uniqueId}`);
@@ -42,8 +43,9 @@ PhillipsBridge.prototype.toggleLights = function(state) {
     var onoff = (state) ? 'on' : 'off';
     twilioClient.sendMessage('Your lights have been turned ' + onoff);
     client.lights.getAll()
-        .then(lights => {
-            for (let light of lights) {
+        .then(function(lights) {
+            for (var i=0; i<lights.length; i++) {
+                var light = lights[i];
                 if(light.id !== state) {
                     phillipsBridge.switchLight(light.id,state);
                 }
@@ -54,15 +56,15 @@ PhillipsBridge.prototype.toggleLights = function(state) {
 
 PhillipsBridge.prototype.switchLight = function(id,state) {
     client.lights.getById(id)
-        .then(light => {
+        .then(function(light) {
             light.on = state;
 
             return client.lights.save(light);
         })
-        .then(light => {
+        .then(function(light) {
             return console.log(`Updated light [${light.id}]`);
         })
-        .catch(error => {
+        .catch(function(error) {
             console.log('Something went wrong');
             console.log(error.stack);
         });
@@ -70,10 +72,10 @@ PhillipsBridge.prototype.switchLight = function(id,state) {
 
 PhillipsBridge.prototype.pingBridge = function() {
     client.bridge.ping()
-        .then(() => {
+        .then(function() {
             console.log('Successful connection');
         })
-        .catch(error => {
+        .catch(function(error) {
             console.log('Could not connect');
         });
 }
@@ -85,10 +87,10 @@ PhillipsBridge.prototype.createUser = function() {
     user.deviceType = 'my_device_type'; // Default is 'huejay'
 
     client.users.create(user)
-        .then(user => {
+        .then(function(user) {
             console.log(`New user created - Username: ${user.username}`);
         })
-        .catch(error => {
+        .catch(function(error) {
             if (error instanceof huejay.Error && error.type === 101) {
                 return console.log(`Link button not pressed. Try again...`);
             }
@@ -99,7 +101,7 @@ PhillipsBridge.prototype.createUser = function() {
 
 PhillipsBridge.prototype.getUserDetail = function() {
     client.users.get()
-        .then(user => {
+        .then(function(user) {
             console.log('Username:', user.username);
             console.log('Device type:', user.deviceType);
             console.log('Create date:', user.created);
@@ -109,12 +111,13 @@ PhillipsBridge.prototype.getUserDetail = function() {
 
 PhillipsBridge.prototype.discoverBridge = function() {
     huejay.discover()
-        .then(bridges => {
-            for (let bridge of bridges) {
+        .then(function(bridges) {
+            for (var i=0; i<bridges.length; i++) {
+                var bridge = bridges[i];
                 console.log(`Id: ${bridge.id}, IP: ${bridge.ip}`);
             }
         })
-        .catch(error => {
+        .catch(function(error) {
             console.log(`An error occurred: ${error.message}`);
         });
 }
