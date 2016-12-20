@@ -1,7 +1,7 @@
-let huejay = require('huejay');
+var huejay = require('huejay');
 var twilioClient = require('./../twilio-client');
 
-let client = new huejay.Client({
+var client = new huejay.Client({
     host: '192.168.1.128',
     username: 'rnVTrfW-f89xK9QIXUMTBLQJnhofaYOTvRHf3Qa6'
 });
