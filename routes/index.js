@@ -22,6 +22,7 @@ exports = module.exports = function(app) {
 
 	// View routes
 	app.get('/', routes.views.index);
+	app.get('/sync', routes.views.sync);
 
 	// External API routes
 	app.get('/api/lightrule/list', routes.api.lightRuleList);

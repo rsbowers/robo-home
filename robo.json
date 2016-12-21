@@ -1,0 +1,12 @@
+{
+  "apps" : [
+    {
+      "name" : "robo",
+      "script" : "index.js",
+      "autorestart" : true,
+      "error_file"      : "logs/robo-err.log",
+      "out_file"        : "logs/robo-out.log",
+      "log_date_format" : "YYYY-MM-DD HH:mm Z"
+    }
+  ]
+}
