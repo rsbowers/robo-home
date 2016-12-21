@@ -2,7 +2,7 @@
   "apps" : [
     {
       "name" : "robo",
-      "script" : "index.js",
+      "script" : "/home/pi/robo-home/index.js",
       "autorestart" : true,
       "error_file"      : "logs/robo-err.log",
       "out_file"        : "logs/robo-out.log",
