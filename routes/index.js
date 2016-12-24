@@ -28,6 +28,7 @@ exports = module.exports = function(app) {
 	// External API routes
 	app.get('/api/lightrule/list', routes.api.lightRuleList);
 	app.get('/api/lights/list', routes.api.lightList);
+	app.post('/api/light/switch', routes.api.lightSwitch);
 	app.get('/api/groups/list', routes.api.groupList);
 	app.get('/api/trips', routes.api.trips);
 	app.post('/api/sync/lights', routes.api.syncLights);

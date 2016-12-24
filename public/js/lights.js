@@ -9,7 +9,18 @@
 					var switchery = new Switchery(this, { disabled: true, size: 'large', secondaryColor: '#666', jackColor: '#fff', jackSecondaryColor: '#fff' });
 				});
 				$('.js-switch').change(function(){
-					console.log($(this).is(":checked"));
+					var state = $(this).is(":checked") ? 'on' : 'off';
+					$.ajax({
+						url: '/api/light/switch',
+						type: 'post',
+						data: {
+							'id':$(this).data('id'),
+							'state':state
+						},
+						success: function(result) {
+							console.log(result);
+						}
+					});
 				})
 			}
 		};
