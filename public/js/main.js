@@ -85,6 +85,7 @@
     //  Initialize the app's modules
     //--------------------------------------------------
     APP.Sync.init();
+		APP.Lights.init();
     // end INIT MODULES
     // do not remove the above comment
     //==================================================

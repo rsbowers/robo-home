@@ -6,6 +6,7 @@ require('dotenv').load();
 var keystone = require('keystone');
 var handlebars = require('express-handlebars');
 var lightTraveler = require('./lib/light-traveler');
+var phillipsBridge = require('./lib/phillips-bridge');
 
 keystone.init({
 
@@ -43,6 +44,7 @@ keystone.set('locals', {
 });
 
 keystone.set('lightTraveler', lightTraveler);
+keystone.set('phillipsBridge', phillipsBridge);
 keystone.set('routes', require('./routes'));
 
 keystone.set('nav', {
@@ -51,6 +53,6 @@ keystone.set('nav', {
 
 keystone.start({
 	onHttpServerCreated: function() {
-		lightTraveler.init();
+		// lightTraveler.init();
 	}
 });

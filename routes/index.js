@@ -23,9 +23,12 @@ exports = module.exports = function(app) {
 	// View routes
 	app.get('/', routes.views.index);
 	app.get('/sync', routes.views.sync);
+	app.get('/lights', routes.views.lights);
 
 	// External API routes
 	app.get('/api/lightrule/list', routes.api.lightRuleList);
+	app.get('/api/lights/list', routes.api.lightList);
+	app.get('/api/groups/list', routes.api.groupList);
 	app.get('/api/trips', routes.api.trips);
 	app.post('/api/sync/lights', routes.api.syncLights);
 	app.get('/api/travelday/list', routes.api.travelDayList);

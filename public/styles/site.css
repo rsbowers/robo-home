@@ -5821,6 +5821,59 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+/*
+ *
+ * Main stylesheet for Switchery.
+ * http://abpetkov.github.io/switchery/
+ *
+ */
+/* Switchery defaults. */
+.switchery {
+  background-color: #fff;
+  border: 1px solid #dfdfdf;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-block;
+  height: 30px;
+  position: relative;
+  vertical-align: middle;
+  width: 50px;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-sizing: content-box;
+  background-clip: content-box; }
+
+.switchery > small {
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  height: 30px;
+  position: absolute;
+  top: 0;
+  width: 30px; }
+
+/* Switchery sizes. */
+.switchery-small {
+  border-radius: 20px;
+  height: 20px;
+  width: 33px; }
+
+.switchery-small > small {
+  height: 20px;
+  width: 20px; }
+
+.switchery-large {
+  border-radius: 40px;
+  height: 40px;
+  width: 66px; }
+
+.switchery-large > small {
+  height: 40px;
+  width: 40px; }
+
 #header {
   margin-top: 30px; }
 
@@ -5834,3 +5887,30 @@ button.close {
   display: block;
   max-width: 100%;
   height: auto; }
+
+.lights-container {
+  display: table;
+  width: 100%;
+  height: 480px;
+  background-color: #000;
+  color: #ccc; }
+
+.light-col {
+  display: table-cell;
+  width: 50%;
+  height: 100%;
+  vertical-align: middle;
+  text-align: center; }
+  .light-col .title {
+    font-size: 2em;
+    padding-bottom: 1em;
+    text-transform: uppercase; }
+
+.switchery-large > small {
+  height: 120px;
+  width: 120px; }
+
+.switchery-large {
+  border-radius: 120px;
+  height: 120px;
+  width: 198px; }
