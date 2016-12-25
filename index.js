@@ -53,6 +53,6 @@ keystone.set('nav', {
 
 keystone.start({
 	onHttpServerCreated: function() {
-		// lightTraveler.init();
+		lightTraveler.init();
 	}
 });
