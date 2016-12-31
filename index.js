@@ -6,7 +6,7 @@ require('dotenv').load();
 var keystone = require('keystone');
 var handlebars = require('express-handlebars');
 var lightTraveler = require('./lib/light-traveler');
-var phillipsBridge = require('./lib/phillips-bridge');
+var lightify = require('./lib/lightify');
 
 keystone.init({
 
@@ -44,11 +44,21 @@ keystone.set('locals', {
 });
 
 keystone.set('lightTraveler', lightTraveler);
-keystone.set('phillipsBridge', phillipsBridge);
+keystone.set('lightify', lightify);
 keystone.set('routes', require('./routes'));
 
 keystone.set('nav', {
 	'users': 'users'
+});
+
+keystone.set( "nav", {
+  "Sync": [
+    {
+      label: "Sync Itinerary",
+      key: "Sync Itinerary",
+      path: "/sync"
+    }
+  ]
 });
 
 keystone.start({

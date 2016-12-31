@@ -15,6 +15,7 @@
     "moment": "^2.10.6",
     "node-cron": "^1.1.2",
     "node-hue-api": "^2.3.0",
+    "node-lightify": "^2.0.2",
     "node-sass": "^3.3.2",
     "node-sass-middleware": "^0.9.7",
     "pm2": "^2.2.2",

@@ -4,6 +4,6 @@
 	"socketAddr":"http://localhost",
 	"socketPort":"9000",
 	"mongoAddr":"localhost",
-	"mongoPort":"27017",
-  "phillipsBridge": "192.168.1.24"
+  "mongoPort":"27017",
+	"lightify": "192.168.1.103"
 }

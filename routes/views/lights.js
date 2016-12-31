@@ -9,18 +9,9 @@ exports = module.exports = function(req, res) {
 	// item in the header navigation.
 	locals.section = 'home';
 
-	var phillipsBridge = keystone.get('phillipsBridge');
-	phillipsBridge.getGroupInfo(function(data){
-		var lights = [];
-		for (var i = 0; i < data.length; i++) {
-			var group = data[i];
-			lights.push({
-				'id':group.id,
-				'name':group.name,
-				'on':group.action.attributes.on
-			});
-		}
-		view.render('lights',{'groups':lights,layout: 'plain'});
+	var lightify = keystone.get('lightify');
+	lightify.getGroupInfo(function(data){
+		view.render('lights',{'groups':data,layout: 'plain'});
 	})
 
 };
